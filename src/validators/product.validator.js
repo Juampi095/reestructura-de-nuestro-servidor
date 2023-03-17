@@ -9,9 +9,9 @@ class ProductValidator{
             query = {category} || {status}
         }
 
-        if(limit) if(isNaN(limit)) throw new Error('Limit must be a number over 0');
+        if(limit) if(isNaN(limit)) throw new Error('El límite debe ser un número mayor a 0');
 
-        if(page) if(isNaN(page) || page <= 0) throw new Error('Page must be a number over 0');
+        if(page) if(isNaN(page) || page <= 0) throw new Error('La página debe ser un número mayor a 0');
 
         const options = {page: page || 1, limit: limit || 10}
         
@@ -26,33 +26,33 @@ class ProductValidator{
     }
 
     async getProductByID(id){
-        if(!id) throw new Error('Product ID is required.');
+        if(!id) throw new Error('Se requiere el ID del producto.');
 
         const product = await ProductsDao.getByID(id)
         return product;
     }
 
     async createProduct({title, description, code, price, stock, category, thumbnails}){
-        if( !title ) throw new Error('Title is required');
-        if( !description ) throw new Error('Description is required');
-        if( !code ) throw new Error('Code is required');
-        if( !price ) throw new Error('Price is required');
-        if( !stock ) throw new Error('Stock is required');
-        if( !category ) throw new Error('Category is required');
+        if( !title ) throw new Error('Se requiere el título del producto.');
+        if( !description ) throw new Error('Se requiere la descripción del producto.');
+        if( !code ) throw new Error('El código es requerido');
+        if( !price ) throw new Error('El precio es requerido');
+        if( !stock ) throw new Error('El stock es requerido');
+        if( !category ) throw new Error('La categoría es requerida');	
 
         const product = ProductsDao.create({title, description, code, price, stock, category, thumbnails});
         return product;
     }
 
     async updateProduct(id, {title, description, code, price, stock, category, thumbnails}){
-        if(!id) throw new Error('Product ID is required.');
+        if(!id) throw new Error('El ID del producto es requerido.');
 
         const product = await ProductsDao.update(id, {title, description, code, price, stock, category, thumbnails});
         return product;
     }
 
     async deleteProduct(id){
-        if(!id) throw new Error('Product ID is required.');
+        if(!id) throw new Error('El ID del producto es requerido.');
 
         const product = await ProductsDao.delete(id);
         return product;

@@ -1,5 +1,5 @@
 import UserValidator from "../validators/user.validator.js";
-import { admin } from '../utils.js';
+import { admin } from '../../utils.js';
 import jwt from 'jsonwebtoken';
 
 class SessionController{

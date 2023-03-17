@@ -4,14 +4,14 @@ import { hashPassword, isValidPass } from '../utils.js'
 class UserValidator{
     async userLogin( email, password ){
         
-        if( !email ) throw new Error('Email is required.');
-        if( !password ) throw new Error('Password is required.');
+        if( !email ) throw new Error('Se requiere el email.');
+        if( !password ) throw new Error('Se requiere la contraseña.');
 
         const user = await userDao.findByEmail(email);
 
-        if(!user) throw new Error('User not found');
+        if(!user) throw new Error('Usuario no encontrado');
 
-        if(!isValidPass(user, password)) throw new Error('Invalid password');
+        if(!isValidPass(user, password)) throw new Error('Contraseña incorrecta');
 
         return user;
     }
@@ -22,7 +22,7 @@ class UserValidator{
 
             // -- checks if there is an existing user with that email
             const user = await userDao.findByEmail(email);
-            if(user) throw new Error('Email already in use');
+            if(user) throw new Error('El email ya existe');
             console.log('bajando al dao')
             const data = {
                 first_name, 
